@@ -6,6 +6,9 @@ const paragraph = document.getElementById('practicum');
 
 function makeOne() {
 	//Ваш код
+	const allForms = document.forms;
+	const numberOfForms = allForms.length;
+	paragraph.textContent = "Количество форм на странице: " + numberOfForms;
 }
 
 document.querySelector('.b-1').onclick = makeOne;
@@ -18,6 +21,9 @@ const paragraphTwo = document.getElementById('practicum2');
 
 function makeTwo() {
 	//Ваш код
+	const formOne = document.forms[0];
+	const name = formOne.getAttribute("name");
+	paragraphTwo.textContent = name;
 }
 
 document.querySelector('.b-2').onclick = makeTwo;
@@ -30,6 +36,10 @@ const paragraphThree = document.getElementById('practicum3');
 
 function makeThree() {
 	//Ваш код
+	const formsLength = document.forms.length;
+	const formLast = document.forms[formsLength - 1];
+	const name = formLast.getAttribute("name");
+	paragraphThree.textContent = name;
 }
 
 document.querySelector('.b-3').onclick = makeThree;
@@ -50,6 +60,10 @@ const paragraphFour = document.getElementById('practicum4');
 
 function makeFour() {
 	//Ваш код
+	const forms = document.forms;
+	const formsAsArray = [...forms];
+	const formNames = formsAsArray.map(form => form.getAttribute("name"));
+	paragraphFour.textContent = formNames.join(", ");
 }
 
 document.querySelector('.b-4').onclick = makeFour;
@@ -63,6 +77,9 @@ const paragraphFive = document.getElementById('practicum5');
 
 function makeFive() {
 	//Ваш код
+	const formThree = document.forms.formThree;
+	const numberofElements = formThree.elements.length;
+	paragraphFive.textContent = `Количество элементов в форме: ${numberofElements}`;
 }
 
 document.querySelector('.b-5').onclick = makeFive;
@@ -75,6 +92,9 @@ const paragraphSix = document.getElementById('practicum6');
 
 function makeSix() {
 	//Ваш код
+	const formTwo = document.forms.formTwo;
+	const numberofElements = formTwo.elements.length;
+	paragraphSix.textContent = `Количество элементов в форме: ${numberofElements}`;
 }
 
 document.querySelector('.b-6').onclick = makeSix;
@@ -94,6 +114,10 @@ const paragraphSeven = document.getElementById('practicum7');
 
 function makeSeven() {
 	//Ваш код
+	const allElements = document.forms.formTwo.elements;
+	const allElementsArray = [...allElements];
+	const elementNames = allElementsArray.map(element => element.getAttribute("name"));
+	paragraphSeven.textContent = elementNames.join(", ");
 }
 
 document.querySelector('.b-7').onclick = makeSeven;
@@ -105,6 +129,10 @@ const paragraphEight = document.getElementById('practicum8');
 
 function makeEight() {
 	//Ваш код
+	const allElements = document.forms.formOne.elements;
+	const allElementsArray = [...allElements];
+	const elementNames = allElementsArray.map(element => element.getAttribute("name"));
+	paragraphEight.textContent = elementNames.join(", ");
 }
 
 document.querySelector('.b-8').onclick = makeEight;
@@ -116,6 +144,10 @@ const paragraphNine = document.getElementById('practicum9');
 
 function makeNine() {
 	//Ваш код
+	const allElements = document.forms.formThree.elements;
+	const allElementsArray = [...allElements];
+	const elementNames = allElementsArray.map(element => element.getAttribute("name"));
+	paragraphNine.textContent = elementNames.join(", ");
 }
 
 document.querySelector('.b-9').onclick = makeNine;
@@ -128,6 +160,8 @@ const paragraphTen = document.getElementById('practicum10');
 
 function makeTen() {
 	//Ваш код
+	const radioBtn = document.forms.lastForm.elements.fourthName;
+	paragraphTen.textContent = radioBtn.value;
 }
 
 document.querySelector('.b-10').onclick = makeTen;
@@ -146,6 +180,11 @@ const paragraphEleven = document.getElementById('practicum11');
 
 function makeEleven() {
 	//Ваш код
+	const options = document.forms.formOne.elements.firstSelect.options;
+	const optionsArray = [...options];
+	const optionsValuesArray = optionsArray.map(option => option.value);
+	const optionsValues = optionsValuesArray.join(", ");
+	paragraphEleven.textContent = optionsValues;
 }
 
 document.querySelector('.b-11').onclick = makeEleven;
@@ -161,6 +200,15 @@ const paragraphTwelve = document.getElementById('practicum12');
 
 function makeTwelve() {
 	//Ваш код
+	const elements = document.forms.formTwo.elements;
+	const checkboxElementsIds = [];
+	for (i = 0; i < elements.length; i++) {
+		if (elements[i].type === "checkbox") {
+			const id = elements[i].getAttribute("id");
+			checkboxElementsIds.push(id);
+		}
+	}
+	paragraphTwelve.textContent = checkboxElementsIds.join(", ");
 }
 
 document.querySelector('.b-12').onclick = makeTwelve;
@@ -178,6 +226,13 @@ const paragraphThirteen = document.getElementById('practicum13');
 
 function checkButton(e) {
 	//Ваш код
+	e.preventDefault();
+	const radioBtn = document.forms.lastForm.elements.fourthName;
+	if (radioBtn.checked) {
+		paragraphThirteen.textContent = "Кнопка выбрана";
+	} else if (!radioBtn.checked) {
+		paragraphThirteen.textContent = "Кнопка не выбрана";
+	}
 }
 
 document.querySelector('.b-13').addEventListener('click', checkButton);
@@ -198,6 +253,15 @@ const paragraphFourteen = document.getElementById('practicum14');
 
 function checkOption() {
 	//Ваш код
+	const select = document.forms.formOne.elements.firstSelect;
+	select.selectedIndex = 1;
+	if (select.value === "Опция 1") {
+		paragraphFourteen.textContent = "Выбран первый вариант";
+	} else if (select.value === "Опция 2") {
+		paragraphFourteen.textContent = "Выбран второй вариант";
+	} else if (select.value === "Опция 3") {
+		paragraphFourteen.textContent = "Выбран третий вариант";
+	}
 }
 
 document.querySelector('.b-14').onclick = checkOption;
@@ -212,6 +276,8 @@ document.querySelector('.b-14').onclick = checkOption;
 
 function makeFifteen() {
 	//Ваш код
+	const select = document.forms.formOne.elements.firstSelect;
+	select.selectedIndex = 2;
 }
 
 makeFifteen();
@@ -226,6 +292,8 @@ makeFifteen();
 
 function makeSixteen() {
 	//Ваш код
+	const checkbox = document.forms.formTwo.elements.checkboxThree;
+	checkbox.checked = true;
 }
 
 makeSixteen();
@@ -240,11 +308,21 @@ makeSixteen();
 //- В обработчике события вызовите метод event.preventDefault() для отмены отправки формы в случае ошибки
 
 const formOne = document.forms.formOne;
+const formOneError = document.querySelector("#errorMessage");
 
 formOne.addEventListener('submit', function (event) {
 	event.preventDefault(); //Отмена отправки
 
 	//Ваш код
+	const elements = formOne.elements;
+	const [name, email, rest] = elements; //Сохранила поля ввода в переменные с помощью деструктуризации и rest
+	if (!name.value || !email.value) {
+		formOneError.textContent = "Пожалуйста, заполните все поля";
+	} else if (name.value && email.value) {
+		formOneError.textContent = "";
+		//Задание 18
+		formOne.reset();
+	}
 });
 
 //Задание 18
@@ -258,6 +336,7 @@ formOne.addEventListener('submit', function (event) {
 formOne.addEventListener('submit', function (event) {
 	event.preventDefault(); //Отмена отправки
 	//Ваш код
+	//СДЕЛАЛА В ЗАДАНИИ 17
 });
 
 //Задание 19
@@ -268,11 +347,18 @@ formOne.addEventListener('submit', function (event) {
 //- В обработчике события, используя условные операторы (if), проверьте выбранную опцию
 //- В зависимости от выбранной опции, измените цвет фона страницы, используя свойство document.body.style.backgroundColor
 
-//const selectElement = //Ваш код
+const selectElement = document.forms.formOne.elements.firstSelect;
 
-// selectElement.onchange = function () {
-// 	//Ваш код
-// };
+selectElement.onchange = function () {
+	//Ваш код
+	if (selectElement.selectedIndex === 0) {
+		document.body.style.backgroundColor = "azure";
+	} else if (selectElement.selectedIndex === 1) {
+		document.body.style.backgroundColor = "bisque";
+	} else if (selectElement.selectedIndex === 2) {
+		document.body.style.backgroundColor = "mediumaquamarine ";
+	}
+};
 
 //Задание 20
 //Добавьте валидацию для поля Email
@@ -286,14 +372,26 @@ formOne.addEventListener('submit', function (event) {
 //const emailInput = //Ваш код
 const errorMessage = document.getElementById('errorMessage');
 
+const emailInput = document.forms.formOne.elements.firstEmail;
+
 emailInput.oninput = function () {
 	//Ваш код
+	const emailRegExp = /^[A-Z0-9._%+-]+@[A-Z0-9-]+\.+.[A-Z]{1,3}$/i;
+	const valid = emailRegExp.test(emailInput.value);
+	if (!valid) {
+		emailInput.style.borderColor = "red";
+		errorMessage.textContent = "Неправильный формат email";
+	} else if (valid) {
+		emailInput.style.borderColor = null;
+		errorMessage.textContent = null;
+	}
 };
 
 //Задание 21
 //При отправке второй формы выполняется проверка всех чекбоксов. Если ни один из чекбоксов не выбран, отмените отправку формы и выведите сообщение об ошибке в элементе с id "result21".
 
 document.querySelector('.b-21').onclick = function (event) {
+	event.preventDefault();
 	const checkboxes = document.forms.formTwo.querySelectorAll('input[type="checkbox"]');
 	let isChecked = false;
 
@@ -305,6 +403,7 @@ document.querySelector('.b-21').onclick = function (event) {
 
 	if (!isChecked) {
 		//Ваш код
+		document.getElementById('result21').textContent = 'Выберите как минимум один вариант';
 	} else {
 		document.getElementById('result21').textContent = 'Проверка пройдена';
 	}
@@ -318,6 +417,7 @@ document.querySelector('.b-22').onclick = function (event) {
 
 	if (nameInput.value.trim() === '') {
 		//Ваш код
+		document.getElementById('result22').textContent = 'Поле Имя не заполнено';
 	} else {
 		document.getElementById('result22').textContent = 'Проверка пройдена';
 	}
@@ -327,12 +427,24 @@ document.querySelector('.b-22').onclick = function (event) {
 //При выборе опции "Я хочу зарегистрироваться" в четвёртой форме кнопка должна быть разблокирована. В противном случае, сделайте кнопку отправки формы заблокированной.
 //Подсказка: используйте свойство disabled
 
+const formBtn = document.forms.lastForm.elements.fourthButton;
+const formRadio = document.forms.lastForm.elements.fourthName;
+formBtn.disabled = true;
+
+formRadio.onchange = function () {
+	if (formRadio.checked) {
+		formBtn.disabled = false;
+	}
+}
+
 //Задание 24
 //Найдите все поля ввода на странице и установите им атрибут "placeholder" со значением "Введите данные"
 //Подсказка: для установки атрибута используйте методы forEach и setAttribute
 
 document.querySelector('.b-24').onclick = function () {
 	//Ваш код
+	const inputs = document.querySelectorAll('.form__input');
+	inputs.forEach(input => input.setAttribute("placeholder", "Введите данные"));
 };
 
 //Задание 25
@@ -344,10 +456,12 @@ document.querySelector('.b-25').onclick = function () {
 	inputs.forEach(function (input) {
 		input.addEventListener('focus', function () {
 			//Ваш код
+			input.style.borderColor = "#00ff00";
 		});
 
 		input.addEventListener('blur', function () {
 			//Ваш код
+			input.style.borderColor = null;
 		});
 	});
 };
@@ -358,6 +472,10 @@ document.querySelector('.b-25').onclick = function () {
 document.querySelector('.b-26').onclick = function (event) {
 	event.preventDefault();
 	//Ваш код
+	const message = document.querySelector("#result26");
+	const input = document.forms.formThree.elements.thirdName;
+
+	message.textContent = input.placeholder;
 };
 
 //Задание 27
@@ -368,6 +486,8 @@ const formTwoInputs = document.querySelectorAll('.secondForm input');
 formTwoInputs.forEach(function (input) {
 	input.addEventListener('input', function () {
 		//Ваш код
+		const message = document.querySelector("#result27");
+		message.textContent = "Изменение внесено";
 	});
 });
 
@@ -378,20 +498,24 @@ const selectFormThree = document.getElementById('firstSelect');
 
 selectFormThree.addEventListener('change', function () {
 	//Ваш код
+	const message = document.querySelector("#result28");
+	message.textContent = "Изменение внесено";
 });
 
 //Задание 29
 //При заполнении всех полей третьей формы выведите их значения в консоль. Используйте JavaScript без использования объекта FormData.
 
 const formThree = document.forms.formThree;
-const nameInputThree = form.elements.thirdName;
-const emailInputThree = form.elements.thirdEmail;
+const nameInputThree = formThree.elements.thirdName;
+const emailInputThree = formThree.elements.thirdEmail;
 
 function handleSubmitTwentyNine(event) {
 	event.preventDefault();
 
 	if (nameInputThree.value && emailInputThree.value) {
 		//Ваш код
+		console.log(nameInputThree.value);
+		console.log(emailInputThree.value);
 	} else {
 		console.log('Пожалуйста, заполните все поля формы.');
 	}
@@ -414,4 +538,5 @@ function handleSubmit(event) {
 	const selectedOptions = Array.from(checkboxes).map((checkbox) => checkbox.labels[0].textContent);
 
 	//Ваш код
+	selectedOptions.forEach(option => console.log(option));
 }
