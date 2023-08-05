@@ -46,7 +46,8 @@ const checkPasswordMatch = (input) => {
 //Функция, которая добавляет сообщение об ошибке и применяет соответствующие стили к элементу формы, если он не заполнен или неверно заполнен
 const checkErrors = (input) => {
 
-    if (errors[0]) { //Если после проверки элемента массив ошибок не пустой, добавляются стили и сообщение об ошибке
+    //Если после проверки элемента массив ошибок не пустой, добавляются стили и сообщение об ошибке
+    if (errors[0]) {
         if (input.classList.contains("is-invalid")) { //Если поле уже содержало иформацию об ошибке, сообщение об ошибке удаляется, чтобы в случае повторной ошибки не выводилось два одинаковых сообщения
             input.parentNode.lastChild.remove();
         }
@@ -56,13 +57,22 @@ const checkErrors = (input) => {
         errorMsg.classList.add("text-danger"); //стилизуем его,
         input.parentNode.append(errorMsg); //вставляем в конец родителя input,
         errors = []; //очищаем массив ошибок для проверки следующего элемента
-    } else if (!errors[0] && input.classList.contains("is-invalid")) { //Если после проверки элемента массив ошибок пустой, но элемент уже содержит стили и сообщение об ошибке, убираем их
+    }
+
+    //Если после проверки элемента массив ошибок пустой, но элемент уже содержит стили и сообщение об ошибке, убираем их
+    else if (!errors[0] && input.classList.contains("is-invalid")) {
         input.parentNode.lastChild.remove(); //Убираем последний элемент в родителе input элемента, потому что всегда добавляем ошибку в конец родителя
         input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
+    }
+
+    //Если ошибок нет, поле подсветится зелёным. Кроме кнопок радио, с ними это выглядит странно
+    else if (input.type !== "radio") {
+        input.classList.add("is-valid");
     }
 };
 
-//Формула, которая проверяет все элементы в коллекции
+//Функция, которая проверяет все элементы в коллекции
 const checkAllInputs = (inputs) => {
 
     for (let input of inputs) {
@@ -70,6 +80,13 @@ const checkAllInputs = (inputs) => {
         checkPasswordMatch(input);
         checkErrors(input);
     };
+};
+
+//Функция для динамической проверки полей
+const checkCurrentInput = (event) => {
+    checkInput(event.target);
+    checkPasswordMatch(event.target);
+    checkErrors(event.target);
 };
 
 //Функция, которая собирает все значения элементов формы и выводит их в консоль
@@ -115,3 +132,7 @@ const handleSubmit = (event) => {
 
 //EVENT LISTENERS
 form.addEventListener("submit", handleSubmit);
+
+for (let input of inputs) {
+    input.addEventListener("change", checkCurrentInput);
+}
